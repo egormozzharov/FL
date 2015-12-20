@@ -3,15 +3,18 @@ using Microsoft.AspNet.Identity;
 
 namespace FL.Migrations
 {
-	using System.Data.Entity.Migrations;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
-	internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
-	{
-		public Configuration()
-		{
-			AutomaticMigrationsEnabled = false;
-			ContextKey = "FL.Models.ApplicationDbContext";
-		}
+    internal sealed class Configuration : DbMigrationsConfiguration<FL.Models.ApplicationDbContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = false;
+            ContextKey = "FL.Models.ApplicationDbContext";
+        }
 
 		protected override void Seed(ApplicationDbContext context)
 		{
@@ -32,6 +35,15 @@ namespace FL.Migrations
 				Name = ".Net developer"
 			};
 			context.Vacancies.AddOrUpdate(v => v.VacancyId, vacancy1);
+
+			TarifData tarifData1 = new TarifData()
+			{
+				CreateDate = DateTime.Now,
+				UpdateDate = DateTime.Now,
+				Info = "Tarif will suit you if you are a begineer customer",
+				Name = "Simple"
+			};
+			context.TarifsDatas.Add(tarifData1);
 		}
-	}
+    }
 }
