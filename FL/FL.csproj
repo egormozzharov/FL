@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AvailableTarifsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TarifDataController.cs" />
@@ -242,6 +243,11 @@
     <Content Include="Views\TarifData\Details.cshtml" />
     <Content Include="Views\TarifData\Edit.cshtml" />
     <Content Include="Views\TarifData\Index.cshtml" />
+    <Content Include="Views\AvailableTarifs\Create.cshtml" />
+    <Content Include="Views\AvailableTarifs\Delete.cshtml" />
+    <Content Include="Views\AvailableTarifs\Details.cshtml" />
+    <Content Include="Views\AvailableTarifs\Edit.cshtml" />
+    <Content Include="Views\AvailableTarifs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

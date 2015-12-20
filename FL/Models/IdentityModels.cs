@@ -21,5 +21,7 @@ namespace FL.Models
 		public DbSet<TarifSale> TarifSales { get; set; }
 
 		public DbSet<Payment> Payments { get; set; }
+
+		public DbSet<IdentityUserRole> UserRoles { get; set; }
 	}
 }
