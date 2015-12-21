@@ -69,8 +69,8 @@ namespace FL.Migrations
 
 			TarifData tarifData1 = new TarifData()
 			{
-				CreateDate = DateTime.Now,
-				UpdateDate = DateTime.Now,
+				CreateDate = DateTime.Now.ToString(),
+				UpdateDate = DateTime.Now.ToString(),
 				Info = "Tarif will suit you if you are a begineer customer",
 				Name = "Simple"
 			};
@@ -79,8 +79,8 @@ namespace FL.Migrations
 			AvailableTarif availableTarif1 = new AvailableTarif()
 			{
 				DurationDays = 30,
-				StartDate = DateTime.Now,
-				EndDate = DateTime.Now.AddDays(365),
+				StartDate = DateTime.Now.ToString(),
+				EndDate = DateTime.Now.AddDays(365).ToString(),
 				Price = 10,
 				TarifData = tarifData1
 			};

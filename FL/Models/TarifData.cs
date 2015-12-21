@@ -12,8 +12,8 @@ namespace FL.Models
 
 		public string Info { get; set; }
 
-		public DateTime CreateDate { get; set; }
+		public String CreateDate { get; set; }
 
-		public DateTime UpdateDate { get; set; }
+		public String UpdateDate { get; set; }
 	}
 }

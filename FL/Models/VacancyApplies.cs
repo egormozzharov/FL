@@ -21,6 +21,6 @@ namespace FL.Models
 
 		public bool Selected { get; set; }
 
-		public DateTime ApplyDate { get; set; }
+		public String ApplyDate { get; set; }
 	}
 }

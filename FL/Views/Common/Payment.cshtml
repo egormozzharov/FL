@@ -1,0 +1,45 @@
+﻿@model FL.ViewModels.PaymentViewModel
+
+<h2>TarifPaymentPage</h2>
+
+
+@using (Html.BeginForm("SubmitPayment", "Common", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Payment.FromAccountNumber, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Payment.FromAccountNumber)
+                @Html.ValidationMessageFor(model => model.Payment.FromAccountNumber)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Payment.AmountOfMoney, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Payment.AmountOfMoney, new {@readonly = "readonly"})
+            </div>
+        </div>
+		@Html.HiddenFor(model => model.TarifId)
+
+
+	    <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

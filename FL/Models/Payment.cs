@@ -12,6 +12,6 @@ namespace FL.Models
 
 		public int AmountOfMoney { get; set; }
 
-		public DateTime Date { get; set; }
+		public String Date { get; set; }
 	}
 }

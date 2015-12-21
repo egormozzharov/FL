@@ -15,9 +15,9 @@ namespace FL.Models
 
 		public int Price { get; set; }
 
-		public DateTime StartDate { get; set; }
+		public String StartDate { get; set; }
 
-		public DateTime EndDate { get; set; }
+		public String EndDate { get; set; }
 
 		public int DurationDays { get; set; }
 

@@ -83,7 +83,7 @@ namespace FL.Controllers
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Common");
                 }
                 else
                 {
@@ -290,7 +290,7 @@ namespace FL.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Common");
         }
 
         //
@@ -372,7 +372,7 @@ namespace FL.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Common");
             }
         }
 
