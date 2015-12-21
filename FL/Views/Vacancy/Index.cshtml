@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>JobsManagementPage</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -38,6 +38,7 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.VacancyId }) |
             @Html.ActionLink("Details", "Details", new { id=item.VacancyId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.VacancyId })
+			@Html.ActionLink("ApplyForTheJob", "ApplyForTheJob", "Common", new { jobId = item.VacancyId }, null)
         </td>
     </tr>
 }

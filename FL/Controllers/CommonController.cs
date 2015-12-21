@@ -13,11 +13,13 @@ namespace FL.Controllers
 	{
 		private readonly ApplicationDbContext _dbContext;
 		private readonly PaymentController _paymentService;
+		private readonly JobsController _jobsService;
 
 		public CommonController()
 		{
 			_dbContext = new ApplicationDbContext();
 			_paymentService = new PaymentController(_dbContext);
+			_jobsService = new JobsController(_dbContext);
 		}
 
 		public ActionResult Index()
@@ -55,6 +57,15 @@ namespace FL.Controllers
 			bool result = _paymentService.PerformSaleOperation(sale);
 
 			return View("PaymentResult", result);
+		}
+
+		[HttpGet]
+		public ActionResult ApplyForTheJob(int jobId)
+		{
+			User currentUser = _dbContext.Users.ToList().First(u => u.Id == User.Identity.GetUserId());
+			Vacancy vacancy = _dbContext.Vacancies.ToList().First(v => v.VacancyId == jobId);
+			bool result = _jobsService.ApplyForTheJob(currentUser, vacancy);
+			return View("ApplyForTheJobResultPage", result);
 		}
 	}
 }

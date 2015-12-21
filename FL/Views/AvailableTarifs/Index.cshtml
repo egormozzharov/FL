@@ -42,10 +42,13 @@
 				@Html.DisplayFor(modelItem => item.DurationDays)
 			</td>
 			<td>
-				@Html.ActionLink("Edit", "Edit", new { id = item.AvailableTarifId }) |
-				@Html.ActionLink("Details", "Details", new { id = item.AvailableTarifId }) |
-				@Html.ActionLink("Delete", "Delete", new { id = item.AvailableTarifId }) |
-				@Html.ActionLink("GoToPayment", "Payment", "Common", new { tarifId = item.AvailableTarifId }, null)
+				@if (User.IsInRole("Director"))
+				{
+					@Html.ActionLink("Edit", "Edit", new {id = item.AvailableTarifId})
+					@Html.ActionLink("Details", "Details", new {id = item.AvailableTarifId}) 
+					@Html.ActionLink("Delete", "Delete", new {id = item.AvailableTarifId}) 
+				}
+				@Html.ActionLink("GoToPayment", "Payment", "Common", new {tarifId = item.AvailableTarifId}, null)
 			</td>
 		</tr>
 	}
