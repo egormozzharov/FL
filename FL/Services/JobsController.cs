@@ -6,24 +6,23 @@ namespace FL.Services
 {
 	public class JobsController
 	{
-		private ApplicationDbContext _dbContext;
+		private DatabaseManager _dbManager;
 
-		public JobsController(ApplicationDbContext dbContext)
+		public JobsController(DatabaseManager dbManager)
 		{
-			this._dbContext = dbContext;
+			this._dbManager = dbManager;
 		}
 
 		public bool ApplyForTheJob(User user, Vacancy vacancy)
 		{
-			_dbContext.VacancyApplies.Add(new VacancyApplie()
+			VacancyApplie vacancyApplie = new VacancyApplie()
 			{
-				ApplyDate = DateTime.Now.ToString(), 
+				ApplyDate = DateTime.Now.ToString(),
 				Selected = false,
 				User = user,
 				Vacancy = vacancy
-			});
-			_dbContext.SaveChanges();
-			return true;
+			};
+			return _dbManager.AddVacancyApply(vacancyApplie);
 		}
 	}
 }

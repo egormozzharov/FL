@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FL.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FL.Controllers
 {
@@ -17,7 +18,8 @@ namespace FL.Controllers
         // GET: /Profile/
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+	        IList<User> users = db.Users.Where(u => !string.IsNullOrEmpty(u.UserName)).ToList();
+			return View(users);
         }
 
         // GET: /Profile/Details/5

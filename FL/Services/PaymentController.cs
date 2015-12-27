@@ -1,32 +1,27 @@
 ﻿using System;
-using System.Linq;
 using FL.Models;
 
 namespace FL.Services
 {
 	public class PaymentController
 	{
-		private ApplicationDbContext _dbContext;
+		private DatabaseManager _dbDatabaseManager;
 
-		public PaymentController(ApplicationDbContext dbContext)
+		public PaymentController(DatabaseManager databaseManager)
 		{
-			this._dbContext = dbContext;
+			this._dbDatabaseManager = databaseManager;
 		}
 
 		public bool PerformSaleOperation(TarifSale sale)
 		{
 			sale.Payment = MakePayment(sale.Payment);
-			_dbContext.TarifSales.Add(sale);
-			_dbContext.SaveChanges();
-			return true;
+			return _dbDatabaseManager.AddSale(sale);
 		}
 
 		private Payment MakePayment(Payment payment)
 		{
 			payment.Date = DateTime.Now.ToString();
-			_dbContext.Payments.Add(payment);
-			_dbContext.SaveChanges();
-			return _dbContext.Payments.ToList().Last();
+			return _dbDatabaseManager.AddPayment(payment);
 		}
 	}
 }

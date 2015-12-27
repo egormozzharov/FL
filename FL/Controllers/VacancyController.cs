@@ -3,12 +3,14 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using FL.Models;
+using FL.Services;
 
 namespace FL.Controllers
 {
     public class VacancyController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+		private DatabaseManager dbDatabaseManager = new DatabaseManager();
 
         // GET: /Vacancy/
         public ActionResult Index()
@@ -108,7 +110,7 @@ namespace FL.Controllers
             Vacancy vacancy = db.Vacancies.Find(id);
             db.Vacancies.Remove(vacancy);
             db.SaveChanges();
-            return RedirectToAction("Index");
+			return View("DeleteJobResultPage", true);
         }
 
         protected override void Dispose(bool disposing)

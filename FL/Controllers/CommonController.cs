@@ -1,25 +1,28 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using FL.Models;
 using FL.Services;
 using FL.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 
 namespace FL.Controllers
 {
 	public class CommonController : Controller
 	{
-		private readonly ApplicationDbContext _dbContext;
+		private readonly DatabaseManager _dbDatabaseManager;
 		private readonly PaymentController _paymentService;
 		private readonly JobsController _jobsService;
+		private readonly FreelancersController _freelancersController;
 
 		public CommonController()
 		{
-			_dbContext = new ApplicationDbContext();
-			_paymentService = new PaymentController(_dbContext);
-			_jobsService = new JobsController(_dbContext);
+			_dbDatabaseManager = new DatabaseManager();
+			_paymentService = new PaymentController(_dbDatabaseManager);
+			_jobsService = new JobsController(_dbDatabaseManager);
+			_freelancersController = new FreelancersController(_dbDatabaseManager);
 		}
 
 		public ActionResult Index()
@@ -30,7 +33,7 @@ namespace FL.Controllers
 		[HttpGet]
 		public ActionResult Payment(int tarifId)
 		{
-			AvailableTarif tarif = _dbContext.AvailableTarifs.ToList().First(t => t.AvailableTarifId == tarifId);
+			AvailableTarif tarif = _dbDatabaseManager.GetAvailableTarifById(tarifId);
 			Payment payment = new Payment() { AmountOfMoney = tarif.Price };
 			PaymentViewModel paymentViewModel = new PaymentViewModel()
 			{
@@ -43,8 +46,8 @@ namespace FL.Controllers
 		[HttpPost]
 		public ActionResult SubmitPayment(PaymentViewModel paymentViewModel)
 		{
-			User currentUser = _dbContext.Users.ToList().First(u => u.Id == User.Identity.GetUserId());
-			AvailableTarif tarif = _dbContext.AvailableTarifs.ToList().First(t => t.AvailableTarifId == paymentViewModel.TarifId);
+			User currentUser = _dbDatabaseManager.GetUserById(User.Identity.GetUserId());
+			AvailableTarif tarif = _dbDatabaseManager.GetAvailableTarifById(paymentViewModel.TarifId);
 			TarifSale sale = new TarifSale()
 			{
 				Buyer = currentUser,
@@ -62,10 +65,17 @@ namespace FL.Controllers
 		[HttpGet]
 		public ActionResult ApplyForTheJob(int jobId)
 		{
-			User currentUser = _dbContext.Users.ToList().First(u => u.Id == User.Identity.GetUserId());
-			Vacancy vacancy = _dbContext.Vacancies.ToList().First(v => v.VacancyId == jobId);
+			User currentUser = _dbDatabaseManager.GetUserById(User.Identity.GetUserId());
+			Vacancy vacancy = _dbDatabaseManager.GetVacancyById(jobId);
 			bool result = _jobsService.ApplyForTheJob(currentUser, vacancy);
 			return View("ApplyForTheJobResultPage", result);
+		}
+
+		[HttpGet]
+		public ActionResult GetFreelancers(string name = "")
+		{
+			IEnumerable<IdentityUser> freelancers = _freelancersController.GetFreelancersByName(name);
+			return View("FreelancersList", freelancers);
 		}
 	}
 }

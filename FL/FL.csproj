@@ -186,6 +186,8 @@
     <Compile Include="Models\TarifSales.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VacancyApplies.cs" />
+    <Compile Include="Services\DatabaseManager.cs" />
+    <Compile Include="Services\FreelancersController.cs" />
     <Compile Include="Services\JobsController.cs" />
     <Compile Include="Services\PaymentController.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -262,6 +264,8 @@
     <Content Include="Views\Common\Payment.cshtml" />
     <Content Include="Views\Common\PaymentResult.cshtml" />
     <Content Include="Views\Common\ApplyForTheJobResultPage.cshtml" />
+    <Content Include="Views\Vacancy\DeleteJobResultPage.cshtml" />
+    <Content Include="Views\Common\FreelancersList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
